@@ -12,7 +12,7 @@ export class SettingsService {
   };
 
 
-  constructor( @Inject(DOCUMENT) private _document ) { 
+  constructor( @Inject(DOCUMENT) private _document) { 
     this.cargarAjustes();
   }
 

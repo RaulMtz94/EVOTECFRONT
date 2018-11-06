@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 //RUTAS
 import { APP_ROUTES } from './app.routes';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -14,6 +14,8 @@ import { RegisterComponent } from './register/register.component';
 import { PagesModule } from './pages/pages.module';
 // Servicios
 import { ServiceModule } from './services/service.module';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ServiceModule } from './services/service.module';
     APP_ROUTES,
     PagesModule,
     ServiceModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

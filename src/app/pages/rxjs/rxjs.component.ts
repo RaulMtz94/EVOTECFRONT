@@ -36,13 +36,14 @@ export class RxjsComponent implements OnInit , OnDestroy {
 
 
   regresaObservable() : Observable< any >{
-    return new Observable( observer =>{
+    return new Observable( (observer : Subscriber<any>) =>{
       let contador =1;
-        let intervalo = setInterval(()=>{
-          contador +=1;  
-          const salida = {
-            valor : contador
-          };
+        const intervalo = setInterval(()=>{
+          contador ++;  
+        const salida = {
+          valor:contador
+        };
+        console.log('Este es el valor :',salida.valor);
           observer.next(salida);
   
          // if(contador ===3){
@@ -56,7 +57,7 @@ export class RxjsComponent implements OnInit , OnDestroy {
 
         }, 1000);
       }).pipe(
-        map( resp => resp.valor),
+        map( (resp) => resp.valor),
         filter((valor , index)=>{
           //filtrando lo que me interesa pasar con el filter 
           if ((valor % 2 ) ===1){
