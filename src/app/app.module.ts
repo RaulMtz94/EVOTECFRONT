@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { PagesModule } from './pages/pages.module';
 // Servicios
 import { ServiceModule } from './services/service.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -29,7 +30,8 @@ import { ServiceModule } from './services/service.module';
     PagesModule,
     ServiceModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
     
   ],
   providers: [],

@@ -1,0 +1,467 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                            <input #input (keyup)="buscarDieta(input.value)" type="text" class="form-control" placeholder="Buscar Dietas">
+                    </div>
+                    <div class="col-lg-3"><button class="btn btn-success mb-2 mr-2" (click)="abrirModal(content)"> <i class="mdi mdi-food-apple"></i> Nueva Dieta</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL DIETA-->
+<ng-template #content let-modal>
+    <form #altaDieta="ngForm" ngNativeValidate (ngSubmit)="opcion === true && alta(altaDieta) || opcion === false && alta(altaDieta)" >
+       <div class="modal-header">
+       <h4 class="modal-title">Nueva Dieta</h4>
+       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+       </button>
+       </div>
+
+    <div class="modal-body">
+        <!--CONTENIDO DEL MODAL-->
+        <div class="form-group">
+            <label for="nombreInput">Nombre:</label>
+            <input required type="text" class="form-control" id="nombre" name="nombre" ngModel [(ngModel)]="dieta.nombre" placeholder="Ingresa el nombre">
+        </div>
+          <div class="form-group">
+              <label for="descripcionInput">Descripcion:</label>
+              <input type="text" class="form-control" id="descripcion" name="descripcion" ngModel [(ngModel)]="dieta.descripcion" placeholder="Ingresa la descripcion">
+            </div>
+          <div class="form-group">
+                <label for="tiempoInput">Tiempo:</label>
+                <input required type="text" class="form-control" id="tiempo" name="tiempo" ngModel [(ngModel)]="dieta.tiempo" placeholder="Ingresa el tiempo de la dieta">
+          </div>
+
+          <!--CONTENIDO DE LOS TABS-->
+                <!-- Tabs -->
+                <section id="tabs">
+                    <div class="container">
+                      <h6 class="section-title h1">Dias</h6>
+                      <div class="row">
+                        <div class="col-xs-12 ">
+                          <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link active" id="nav-lunes-tab" data-toggle="tab" href="#nav-lunes" role="tab" aria-controls="nav-lunes" aria-selected="true">Lunes</a>
+                              <a class="nav-item nav-link" id="nav-martes-tab" data-toggle="tab" href="#nav-martes" role="tab" aria-controls="nav-martes" aria-selected="false">Martes</a>
+                              <a class="nav-item nav-link" id="nav-miercoles-tab" data-toggle="tab" href="#nav-miercoles" role="tab" aria-controls="nav-miercoles" aria-selected="false">Miercoles</a>
+                              <a class="nav-item nav-link" id="nav-jueves-tab" data-toggle="tab" href="#nav-jueves" role="tab" aria-controls="nav-jueves" aria-selected="false">Jueves</a>
+                              <a class="nav-item nav-link" id="nav-viernes-tab" data-toggle="tab" href="#nav-viernes" role="tab" aria-controls="nav-viernes" aria-selected="false">Viernes</a>
+                              <a class="nav-item nav-link" id="nav-sabado-tab" data-toggle="tab" href="#nav-sabado" role="tab" aria-controls="nav-sabado" aria-selected="false">Sabado</a>
+                              <a class="nav-item nav-link" id="nav-domingo-tab" data-toggle="tab" href="#nav-domingo" role="tab" aria-controls="nav-domingo" aria-selected="false">Domingo</a>
+
+                            </div>
+                          </nav>
+                          <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <!--DIA LUNES-->
+                            <div class="tab-pane fade show active" id="nav-lunes" role="tabpanel" aria-labelledby="nav-lunes-tab">
+                               <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label for="caloriasInput">Calorias:</label>
+                                          <input *ngIf="opcion===false" type="text" class="form-control" id="caloriasL" name="caloriasL" required ngModel [(ngModel)]=" dieta.dias.lunes.calorias" placeholder="Ingresa las calorias">
+                                          <input *ngIf="opcion===true" type="text" class="form-control" id="caloriasL" name="caloriasL" required ngModel  placeholder="Ingresa las calorias">
+                                        </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label for="carbohidratosInput">Carbohidratos:</label>
+                                          <input *ngIf="opcion===false" type="text" class="form-control" id="carbohidratosL" name="carbohidratosL" required ngModel [(ngModel)]=" dieta.dias.lunes.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                          <input *ngIf="opcion===true"  type="text" class="form-control" id="carbohidratosL" name="carbohidratosL" required ngModel  placeholder="Ingresa los carbohidratos">
+
+                                        </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label for="proteinasInput">Proteinas:</label>
+                                          <input *ngIf="opcion===false" type="text" class="form-control" id="proteinasL" name="proteinasL" required ngModel [(ngModel)]="  dieta.dias.lunes.proteinas" placeholder="Ingresa las proteinas">
+                                          <input *ngIf="opcion===true"  type="text" class="form-control" id="proteinasL" name="proteinasL" required ngModel  placeholder="Ingresa las proteinas">
+                                        </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                  
+                                <div class="form-group">
+                                    <label for="grasasInput">Grasas:</label>
+                                    <input *ngIf="opcion===false" type="text" class="form-control" id="grasasL" name="grasasL" required ngModel [(ngModel)]=" dieta.dias.lunes.grasas" placeholder="Ingresa las grasas">
+                                    <input *ngIf="opcion===true"  type="text" class="form-control" id="grasasL" name="grasasL" required ngModel  placeholder="Ingresa las grasas">
+
+                                  </div>
+                                  </div>
+                               </div> 
+                            </div>
+                            <!--DIA MARTES-->
+                            <div class="tab-pane fade" id="nav-martes" role="tabpanel" aria-labelledby="nav-martes-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasM" name="caloriasM" ngModel [(ngModel)]="  dieta.dias.martes.calorias" placeholder="Ingresa las calorias">
+                                               <input *ngIf="opcion===true" required type="text" class="form-control" id="caloriasM" name="caloriasM" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false"  required type="text" class="form-control" id="carbohidratosM" name="carbohidratosM" ngModel [(ngModel)]="  dieta.dias.martes.carbohidratos"  placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="carbohidratosM" name="carbohidratosM" ngModel   placeholder="Ingresa los carbohidratos">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="proteinasM" name="proteinasM" ngModel [(ngModel)]="  dieta.dias.martes.proteinas" placeholder="Ingresa las proteinas">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="proteinasM" name="proteinasM" ngModel  placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasM" name="grasasM" ngModel [(ngModel)]=" dieta.dias.martes.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasM" name="grasasM" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                            </div>
+                            <!--DIA MIERCOLES-->
+                            <div class="tab-pane fade" id="nav-miercoles" role="tabpanel" aria-labelledby="nav-miercoles-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasMI" name="caloriasMI" ngModel [(ngModel)]=" dieta.dias.miercoles.calorias" placeholder="Ingresa las calorias">
+                                               <input  *ngIf="opcion===true" required type="text" class="form-control" id="caloriasMI" name="caloriasMI" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="carbohidratosMI" name="carbohidratosMI" ngModel [(ngModel)]=" dieta.dias.miercoles.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="carbohidratosMI" name="carbohidratosMI" ngModel  placeholder="Ingresa los carbohidratos">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="proteinasMI" name="proteinasMI" ngModel [(ngModel)]=" dieta.dias.miercoles.proteinas" placeholder="Ingresa las proteinas">
+                                               <input  *ngIf="opcion===true" required type="text" class="form-control" id="proteinasMI" name="proteinasMI" ngModel placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasMI" name="grasasMI" ngModel [(ngModel)]=" dieta.dias.miercoles.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasMI" name="grasasMI" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                            </div>
+                            <!--DIA JUEVES-->
+                            <div class="tab-pane fade" id="nav-jueves" role="tabpanel" aria-labelledby="nav-jueves-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasJ" name="caloriasJ" ngModel [(ngModel)]=" dieta.dias.jueves.calorias" placeholder="Ingresa las calorias">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="caloriasJ" name="caloriasJ" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="carbohidratosJ" name="carbohidratosJ" ngModel [(ngModel)]=" dieta.dias.jueves.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="carbohidratosJ" name="carbohidratosJ" ngModel  placeholder="Ingresa los carbohidratos">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="proteinasJ" name="proteinasJ" ngModel [(ngModel)]=" dieta.dias.jueves.proteinas" placeholder="Ingresa las proteinas">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="proteinasJ" name="proteinasJ" ngModel  placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasJ" name="grasasJ" ngModel [(ngModel)]=" dieta.dias.jueves.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasJ" name="grasasJ" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                            </div>
+                            <!--DIA VIERNES-->
+                            <div class="tab-pane fade" id="nav-viernes" role="tabpanel" aria-labelledby="nav-viernes-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasV" name="caloriasV" ngModel [(ngModel)]=" dieta.dias.viernes.calorias" placeholder="Ingresa las calorias">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="caloriasV" name="caloriasV" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="carbohidratosV" name="carbohidratosV" ngModel [(ngModel)]=" dieta.dias.viernes.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="carbohidratosV" name="carbohidratosV" ngModel  placeholder="Ingresa los carbohidratos">
+                                             </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="proteinasV" name="proteinasV" ngModel [(ngModel)]=" dieta.dias.viernes.proteinas" placeholder="Ingresa las proteinas">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="proteinasV" name="proteinasV" ngModel  placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasV" name="grasasV" ngModel [(ngModel)]=" dieta.dias.viernes.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasV" name="grasasV" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                            </div>
+                            <!--DIA SABADO-->
+                            <div class="tab-pane fade" id="nav-sabado" role="tabpanel" aria-labelledby="nav-sabado-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasS" name="caloriasS" ngModel [(ngModel)]=" dieta.dias.sabado.calorias" placeholder="Ingresa las calorias">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="caloriasS" name="caloriasS" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="carbohidratosS" name="carbohidratosS" ngModel [(ngModel)]=" dieta.dias.sabado.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="carbohidratosS" name="carbohidratosS" ngModel  placeholder="Ingresa los carbohidratos">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required  type="text" class="form-control" id="proteinasS" name="proteinasS" ngModel [(ngModel)]=" dieta.dias.sabado.proteinas" placeholder="Ingresa las proteinas">
+                                               <input *ngIf="opcion===true"  required  type="text" class="form-control" id="proteinasS" name="proteinasS" ngModel  placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasS" name="grasasS" ngModel [(ngModel)]=" dieta.dias.sabado.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasS" name="grasasS" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                            </div>
+                            <!--DIA DOMINGO-->
+                            <div class="tab-pane fade" id="nav-domingo" role="tabpanel" aria-labelledby="nav-domingo-tab">
+                                    <div class="row">
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="caloriasInput">Calorias:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="caloriasD" name="caloriasD" ngModel [(ngModel)]=" dieta.dias.domingo.calorias" placeholder="Ingresa las calorias">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="caloriasD" name="caloriasD" ngModel  placeholder="Ingresa las calorias">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="carbohidratosInput">Carbohidratos:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="carbohidratosD" name="carbohidratosD" ngModel [(ngModel)]=" dieta.dias.domingo.carbohidratos" placeholder="Ingresa los carbohidratos">
+                                               <input *ngIf="opcion===true" required type="text" class="form-control" id="carbohidratosD" name="carbohidratosD" ngModel  placeholder="Ingresa los carbohidratos">
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                           <div class="form-group">
+                                               <label for="proteinasInput">Proteinas:</label>
+                                               <input *ngIf="opcion===false" required type="text" class="form-control" id="proteinasD" name="proteinasD" ngModel [(ngModel)]=" dieta.dias.domingo.proteinas" placeholder="Ingresa las proteinas">
+                                               <input *ngIf="opcion===true"  required type="text" class="form-control" id="proteinasD" name="proteinasD" ngModel  placeholder="Ingresa las proteinas">
+
+                                              </div>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       
+                                     <div class="form-group">
+                                         <label for="grasasInput">Grasas:</label>
+                                         <input *ngIf="opcion===false" required type="text" class="form-control" id="grasasD" name="grasasD" ngModel [(ngModel)]=" dieta.dias.domingo.grasas" placeholder="Ingresa las grasas">
+                                         <input *ngIf="opcion===true"  required type="text" class="form-control" id="grasasD" name="grasasD" ngModel  placeholder="Ingresa las grasas">
+
+                                        </div>
+                                       </div>
+                                    </div> 
+                                                          
+                            </div>
+                          </div>
+                        
+                        </div>
+                      </div>
+                    </div>
+                </section>
+                  <!-- ./Tabs -->
+          <!---->
+    </div>
+
+    <div class="modal-footer">
+        <button *ngIf="opcion===true" type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Guardar</button>
+        <button *ngIf="opcion===false" type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Actualizar Dieta</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+    </form>
+</ng-template>
+<!--MODAL PARA ASIGNAR DIETA-->
+<ng-template #asignar let-modal>
+    <div class="modal-header">
+       <h4 class="modal-title">Asignacion de dieta</h4>
+       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <form #asignarDieta ngNativeValidate  >
+
+    <div class="modal-body">
+        <!--CONTENIDO DEL MODAL-->
+        <div class="form-body">
+          <!--CABECERA DEL MODAL-->
+         
+            <!--Contenido de la tabla-->
+            <div class="row animated fadeIn">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                        <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="Buscar usuario">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table table-hover table-responsive">
+                                        <thead>
+                                                <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Apellido P.</th>
+                                                        <th>Apellido M.</th>
+                                                        <th>Telefono</th>
+                                                        <th>Estatus</th>
+                                                        <th></th>
+                                                    </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor = "let cliente of cliente">
+                                            <td><i class="mdi mdi-account-box-outline"></i>{{cliente.nombre}}</td>
+                                            <td>{{cliente.apellidoP}}</td>
+                                            <td>{{cliente.apellidoM}}</td>
+                                            <td><i class="mdi mdi-cellphone-iphone"></i>{{cliente.telefono}}</td>
+                                            <td>
+                                                <span *ngIf="cliente.estatus==true" class="label label-success">Activo</span>
+                                                <span *ngIf="!cliente.estatus==true" class="label label-danger">Baja</span>
+                                            </td>
+                                            
+                                            <td>
+                                                <button (click)="asignarD(cliente)" class="btn btn-primary"> <i class="mdi mdi-library-plus"></i></button>                
+                                            </td>
+                                            </tr>
+                
+                                        </tbody>
+                                       
+                
+                                    </table>
+                                  </div>
+                            </div>
+                            
+                            
+                            <button class="btn btn-secondary">Anteriores</button>
+                            <button class="btn btn-secondary">Siguientes</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+               
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</form>
+</ng-template>
+
+
+
+<!--SECCION DE LA LISTA-->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"> Dietas Registradas(<small>{{totalRegistros}}</small>)</h3>
+                <table class="table table-hover">
+                    <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Tiempo</th>
+                                <th>Calorias Totales</th>
+                                <th>Estatus</th>
+                                <th>Accion</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = 'let dieta of dietas ; let i = index'>
+                        <td>{{dieta.nombre}}</td>
+                        <td>{{dieta.descripcion}}</td>
+                        <td>{{dieta.tiempo}}</td>
+                        <td>{{dieta.caloriasTotales}}</td>
+                        <td>
+                          <span *ngIf="dieta.estatus==true" class="label label-success">Activo</span>
+                          <span *ngIf="dieta.estatus==false" class="label label-danger">Baja</span>
+                        </td>
+                        
+
+                        <td>
+                            <button (click)="editarDieta(dieta,content)" class="btn btn-primary"> <i class="mdi mdi-table-edit"></i></button>
+                            <button (click)="bajaDieta(dieta)" *ngIf="dieta.estatus===true" class="btn btn-danger"> <i class="mdi mdi-tag-remove"></i></button>
+                            <button (click)="altaDieta(dieta)" *ngIf="dieta.estatus===false" class="btn btn-success"> <i class="mdi mdi-tag-plus"></i></button>
+                            <button (click)="abrirAsignar(asignar , dieta)" class="btn btn-primary"> <i class="mdi mdi-food-fork-drink"></i></button>
+
+                          </td>
+                        </tr>
+                            
+                    </tbody>
+                   
+
+                </table>
+                <button class="btn btn-secondary">Anteriores</button>
+                <button class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

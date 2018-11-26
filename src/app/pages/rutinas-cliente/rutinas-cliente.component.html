@@ -1,0 +1,95 @@
+<div *ngIf="show" class="container">
+        <div class="modal-header">
+                <h4 class="modal-title">Detalle Rutina</h4>
+                
+             </div>
+             <form #asignarRutina ngNativeValidate  >
+            
+                    <div class="modal-body">
+                        <!--CONTENIDO DEL MODAL-->
+                        <div class="form-body">
+                          <!--CABECERA DEL MODAL-->
+                          <h1>Informacion de la rutina</h1>
+                          <br>
+                          <p>Nombre : {{detalleRutina.nombre.Nombre}}</p>
+                          <br>
+                          <div  class="row">
+                                <div class="col-lg-6">
+                                      <h5>Lunes:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.lunes); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.lunes[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Martes:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.martes); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.martes[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Miercoles:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.miercoles); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.miercoles[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Jueves:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.jueves); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.jueves[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Viernes:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.viernes); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.viernes[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Sabado:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.sabado); let i = index "class="row">
+                                        <div class="col-6">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.sabado[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-lg-6">
+                                      <h5>Domingo:</h5>
+                                      <label class="text-info">Ejercicios y repeticiones </label>                
+                                      <div *ngFor = " let r of objectKeys(detalleRutina.domingo); let i = index "class="row">
+                                        <div class="col-6 border border-primary">
+                                            <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.domingo[r]}}</p>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                     
+                             
+                                            
+                                        
+                                    
+                                 
+                         
+                           
+                               
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                   </form>
+</div>

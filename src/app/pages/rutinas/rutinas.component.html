@@ -1,0 +1,313 @@
+<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-9">
+                                <input #input  type="text" class="form-control" placeholder="Buscar Rutina">
+                        </div>
+                        <div class="col-lg-3">
+                                <button (click)="abrirModal(nuevarutina)"class="btn btn-success"> Nueva rutina</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #nuevarutina let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">CrearRutina</h4>
+        
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+                  
+        <div style="overflow:auto" class="modal-body">
+            <label>Nombre:</label>
+            <input id="nombre" type="text" class="form-control">
+                      
+            <!--CONTENIDO DEL MODAL-->
+            <label>Dia:</label>
+            <select id="dia"class="form-control">
+              <option *ngFor="let dia of dias">{{dia}}</option>
+            </select>
+           <div class="row">
+            <div class="col-4">
+              <label>Ejercicios:</label>
+              <input id="ejercicioslunes"type="text" class="form-control">
+            </div>
+            <div class="col-4">
+                <label>Repeticiones:</label>
+                <input id="repeticioneslunes" type="text" class="form-control">
+              </div>
+              <div class="col-2">
+                 <br>
+                  <button (click)="agregar('lunes')"class="btn btn-info" >Agregar</button>
+                </div>
+
+           </div>
+           <br>
+           
+           <div id="tablaP" class="table-responsive">
+              <table id="tablaRutinas"class="table color-table muted-table">
+                  <thead>
+                      <tr >
+                        
+                         
+                          <th>Dia</th>
+                          <th>Ejercicio</th>
+                          <th>Repeticiones</th>
+                        
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let d of tabla">
+                          
+                          <td>{{d.dia}}</td>
+                          <td>{{d.ejercicios}}</td>
+                          <td>{{d.repeticiones}}</td>
+                          
+                      </tr>
+                     
+                     
+                  </tbody>
+              </table>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+              <button (click)="limpiar()"class="btn btn-info btn-block">Limpiar</button>
+              </div>
+              <div class="col-3">
+                  <button (click)="guardarRutina()"class="btn btn-success btn-block">Guardar Rutina</button>
+                  </div>
+          </div>
+          
+            
+        </div>
+        <div class="modal-footer">
+          
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    
+    </ng-template>
+
+<!--MODAL PARA ASIGNAR-->
+<ng-template #asignar let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">Asignacion de rutina</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <form #asignarRutina ngNativeValidate  >
+    
+        <div class="modal-body">
+            <!--CONTENIDO DEL MODAL-->
+            <div class="form-body">
+              <!--CABECERA DEL MODAL-->
+             
+                <!--Contenido de la tabla-->
+                <div class="row animated fadeIn">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                            <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="Buscar usuario">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <table class="table table-hover table-responsive">
+                                            <thead>
+                                                    <tr>
+                                                            <th>Nombre</th>
+                                                            <th>Apellido P.</th>
+                                                            <th>Apellido M.</th>
+                                                            <th>Telefono</th>
+                                                            <th>Estatus</th>
+                                                            <th></th>
+                                                        </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor = "let cliente of cliente">
+                                                <td><i class="mdi mdi-account-box-outline"></i>{{cliente.nombre}}</td>
+                                                <td>{{cliente.apellidoP}}</td>
+                                                <td>{{cliente.apellidoM}}</td>
+                                                <td><i class="mdi mdi-cellphone-iphone"></i>{{cliente.telefono}}</td>
+                                                <td>
+                                                    <span *ngIf="cliente.estatus==true" class="label label-success">Activo</span>
+                                                    <span *ngIf="!cliente.estatus==true" class="label label-danger">Baja</span>
+                                                </td>
+                                                
+                                                <td>
+                                                    <button (click)="asignarR(cliente)" class="btn btn-primary"> <i class="mdi mdi-library-plus"></i></button>                
+                                                </td>
+                                                </tr>
+                    
+                                            </tbody>
+                                           
+                    
+                                        </table>
+                                      </div>
+                                </div>
+                                
+                                
+                                <button class="btn btn-secondary">Anteriores</button>
+                                <button class="btn btn-secondary">Siguientes</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                   
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>
+
+<!--MODAL PARA VER DETALLE-->
+<ng-template #detalle let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">Detalle Rutina</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <form #asignarRutina ngNativeValidate  >
+    
+        <div class="modal-body">
+            <!--CONTENIDO DEL MODAL-->
+            <div class="form-body">
+              <!--CABECERA DEL MODAL-->
+              <h1>Informacion de la rutina</h1>
+              <br>
+              <p>Nombre : {{detalleRutina.nombre.Nombre}}</p>
+              <br>
+              <div class="row">
+                  <div class="col-lg-6">
+                        <h5>Lunes:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.lunes); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.lunes[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Martes:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.martes); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.martes[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Miercoles:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.miercoles); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.miercoles[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Jueves:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.jueves); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.jueves[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Viernes:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.viernes); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.viernes[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Sabado:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.sabado); let i = index "class="row">
+                          <div class="col-6">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.sabado[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-lg-6">
+                        <h5>Domingo:</h5>
+                        <label class="text-info">Ejercicios y repeticiones </label>                
+                        <div *ngFor = " let r of objectKeys(detalleRutina.domingo); let i = index "class="row">
+                          <div class="col-6 border border-primary">
+                              <p><i class="mdi mdi-dumbbell"></i>{{ r |json | rutinas }} : {{detalleRutina.domingo[r]}}</p>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+         
+                 
+                                
+                            
+                        
+                     
+             
+               
+                   
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+         </form>
+</ng-template>
+
+
+<!--TABLA DE REGISTROS-->
+
+<!--SECCION DE LA LISTA-->
+<div class="row animated fadeIn">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"> Rutinas Registradas(<small>{{totalRegistros}}</small>)</h3>
+                    <table class="table table-hover">
+                        <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Asignar</th>
+                                    
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = 'let rutina of rutinaslista ; let i = index'>
+                            <td>{{rutina.nombre.Nombre}}</td>
+                            <td>
+                                    <button (click)="abrirDetalle(detalle , rutina)" class="btn btn-primary"> <i class="mdi mdi-view-list"></i></button>
+                            </td>
+                            <td>
+                                 <button (click)="abrirAsignar(asignar , rutina)" class="btn btn-primary"> <i class="mdi mdi-account-plus"></i></button>
+                              </td>
+                            </tr>
+                                
+                        </tbody>
+                       
+    
+                    </table>
+                    <button class="btn btn-secondary">Anteriores</button>
+                    <button class="btn btn-secondary">Siguientes</button>
+                </div>
+            </div>
+        </div>
+    </div>

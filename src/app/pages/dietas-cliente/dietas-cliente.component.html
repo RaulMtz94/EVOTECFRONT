@@ -1,0 +1,38 @@
+<div *ngIf="show" class="container">
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                          
+                            <h4 class="card-title">{{detalleDieta.nombre}}</h4>
+                            <h6 class="card-subtitle">{{detalleDieta.descripcion}}</h6>
+                            <h6 class="card-subtitle">Tiempo : {{detalleDieta.tiempo}}</h6>
+            
+                            <div class="table-responsive">
+                                <table class="table stylish-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Dias</th>
+                                            <th >Calorias</th>
+                                            <th>Carbohidratos</th>
+                                            <th>proteinas</th>
+                                            <th>Grasas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor = "let dia of dias;let i=index">
+                                            <td >{{dia}}</td>     
+                                            <td>{{days[dia].calorias}} </td>
+                                            <td>{{days[dia].carbohidratos}} Gramos</td>
+                                            <td>{{days[dia].proteinas}} Gramos</td>
+                                            <td>{{days[dia].grasas}} Gramos<td> 
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

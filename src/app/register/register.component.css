@@ -59,20 +59,12 @@ Login register and recover password Page
           transition: opacity 1s;
       
       }
-      .carousel .one {
-        background: url(../../assets/images/background/login-register.jpg);
-          background-size: cover;
-          -moz-background-size: cover;
-      }
+    
       .carousel .two {
         background-size: cover;
           -moz-background-size: cover;
       }
-      .carousel .three {
-        background: url(../../assets/images/background/login-register.jpg);
-        background-size: cover;
-          -moz-background-size: cover;
-      }
+    
       .carousel .active.left {
           left:0;
           opacity:0;

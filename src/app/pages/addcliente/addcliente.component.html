@@ -1,0 +1,232 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                            <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="Buscar Usuario">
+                    </div>
+                    <div class="col-lg-3"><button class="btn btn-success mb-2 mr-2" (click)="openVerticallyCentered(content)"> <i class="mdi mdi-account-plus"></i> Nuevo Cliente</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL PARA DAR DE ALTA CLIENTE-->
+<ng-template #content let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">Nuevo cliente</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+            <!--CONTENIDO DEL MODAL-->
+            <div class="form-body">
+                    <form ngNativeValidate [formGroup]="altaCliente">
+                  <div class="row p-t-20">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label class="control-label">Nombre(s)</label>
+                              <input formControlName="nombre"  name="nombre" type="text"  class="form-control" required >
+                               </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Apellido Paterno</label>
+                                <input formControlName="app"  name="app"type="text"  class="form-control" required>
+                                 </div>
+                        </div>
+                      <!--/span-->
+                    
+                            <div class="col-md-4">
+                              <div class="form-group ">
+                                  <label class="control-label">Apellido Materno</label>
+                                  <input  formControlName="apm"   name="apm" type="text"  class="form-control" >
+                                  </div>
+                          </div>
+    
+                     
+                      <!--/span-->
+                  </div>
+                  <div class="row">
+                                     
+                        <div class="col-md-6">
+                              <div class="form-group ">
+                                  <label class="control-label">Domicilio</label>
+                                  <input formControlName="domicilio" type="text" required name="domicilio" class="form-control">
+                                   </div>
+                          </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                  <div class="form-group ">
+                                      <label class="control-label">Telefono</label>
+                                      <input formControlName="telefono" required  name="telefono" type="text"  class="form-control" >
+                                      </div>
+                             
+                            
+                            </div>
+                            <!--/span-->
+                           
+                        </div>
+                        <h3 class="box-title m-t-40">Datos de cuenta de usuario</h3>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="exampleInputuname">Correo</label>
+                              <div class="input-group">
+                                  <div class="input-group-addon"><i class="ti-user"></i></div>
+                                  <input formControlName="correo" required name="correo" type="email" class="form-control" >
+                              </div>
+                          </div>
+                          </div>
+                          
+                          <div class="col-md-4">
+                                <div class="form-group">
+                                        <label for="pwd1">Contraseña</label>
+                                            <input formControlName="password"  name="password" class="form-control" type="password" required placeholder="Contraseña">
+                                            
+                                    </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="pwd2">Confirmar contraseña</label>
+                                  <input formControlName="password2"  name="password2" class="form-control" type="password" required placeholder="Contraseña">       
+                                  <small *ngIf="altaCliente.errors?.sonIguales && !altaCliente.pristine" class="form-control-feedback text-danger"> Las contraseñas no coinciden. </small>      
+                          </div>
+                          </div>
+                            <!--/span-->
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)= "registrarCliente()" class="btn btn-success"> <i class="fa fa-save"></i> Guardar</button>
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+</ng-template>
+<!--MODAL PARA EDITAR UN CLIENTE-->
+<ng-template #editar let-modal>
+        <div class="modal-header">
+           <h4 class="modal-title">Editar cliente</h4>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <form #editarCliente ngNativeValidate (ngSubmit)="actualizarCliente(editarCliente)" >
+
+        <div class="modal-body">
+            <!--CONTENIDO DEL MODAL-->
+            <div class="form-body">
+                  <div class="row p-t-20">
+                        <input [(ngModel)]="clienteEditado._id" hidden="hidden" name="id" type="text"  class="form-control"  >  
+                    <div class="col-md-4">
+                          <div class="form-group">
+
+                              <label class="control-label">Nombre(s)</label>
+                              <input [(ngModel)]="clienteEditado.nombre" name="nombre" type="text"  class="form-control" required >
+                               </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group ">
+                                <label class="control-label">Apellido Paterno</label>
+                                <input [(ngModel)]="clienteEditado.apellidoP"   name="app"type="text"  class="form-control" required>
+                                 </div>
+                        </div>
+                      <!--/span-->
+                    
+                            <div class="col-md-4">
+                              <div class="form-group ">
+                                  <label class="control-label">Apellido Materno</label>
+                                  <input [(ngModel)]="clienteEditado.apellidoM" name="apm" type="text"  class="form-control" >
+                                  </div>
+                          </div>
+    
+                     
+                      <!--/span-->
+                  </div>
+                  <div class="row">
+                                     
+                        <div class="col-md-6">
+                              <div class="form-group ">
+                                  <label class="control-label">Domicilio</label>
+                                  <input [(ngModel)]="clienteEditado.domicilio" type="text" required name="domicilio" class="form-control">
+                                   </div>
+                          </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                  <div class="form-group ">
+                                      <label class="control-label">Telefono</label>
+                                      <input [(ngModel)]="clienteEditado.telefono"  required  name="telefono" type="text"  class="form-control" >
+                                      </div>
+                             
+                            
+                            </div>
+                            <!--/span-->
+                           
+                        </div>
+                      
+                   
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Guardar</button>
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>
+
+
+<div class="row animated fadeIn">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"> Usuarios registrados (<small>{{totalRegistros}}</small>)</h3>
+                    <table class="table table-hover">
+                        <thead>
+                                <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido P.</th>
+                                        <th>Apellido M.</th>
+                                        <th>Domicilio</th>
+                                        <th>Telefono</th>
+                                        <th>Fecha de Alta</th>
+                                        <th>Fecha Vencimiento</th>
+                                        <th>Estatus</th>
+                                        <th></th>
+                                    </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let cliente of cliente">
+                            <td><i class="mdi mdi-account-box-outline"></i>{{cliente.nombre}}</td>
+                            <td>{{cliente.apellidoP}}</td>
+                            <td>{{cliente.apellidoM}}</td>
+                            <td><i class="mdi mdi-home"></i>{{cliente.domicilio}}</td>
+                            <td><i class="mdi mdi-cellphone-iphone"></i>{{cliente.telefono}}</td>
+                            <td><i class="mdi mdi-calendar-check"></i>{{cliente.fechaAlta | fecha:10}}</td>
+                            <td><i class="mdi mdi-calendar-clock"></i>{{cliente.fechaVencimiento | fecha:10}}</td>
+                            <td>
+                                <span *ngIf="cliente.estatus==true" class="label label-success">Activo</span>
+                                <span *ngIf="!cliente.estatus==true" class="label label-danger">Baja</span>
+                            </td>
+                            
+                            <td>
+                                <button (click)="editarCliente(cliente,editar)" class="btn btn-primary"> <i class="mdi mdi-account-edit"></i></button>
+                                <button (click)="bajaCliente(cliente)" *ngIf="cliente.estatus===true" class="btn btn-danger"> <i class="mdi mdi-account-off"></i></button>
+                                <button (click)="activarCliente(cliente)" *ngIf="!cliente.estatus==true" class="btn btn-success"> <i class="mdi mdi-account-check"></i></button>
+
+                            </td>
+                            </tr>
+
+                        </tbody>
+                       
+
+                    </table>
+                    <button class="btn btn-secondary">Anteriores</button>
+                    <button class="btn btn-secondary">Siguientes</button>
+                </div>
+            </div>
+        </div>
+</div>
